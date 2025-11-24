@@ -224,12 +224,12 @@ elif page == "ChatPDF":
                 response = client.responses.create(
                     model="gpt-5-mini",
                     input=user_q,
-                    tools=[{"type": "file_search"}],
-                    tool_resources={
-                        "file_search": {
-                            "vector_store_ids": [st.session_state.pdf_vector_store_id]
+                    tools=[
+                      {
+                        "type": "file_search",
+                        "vector_store_ids": [st.session_state.pdf_vector_store_id]
                         }
-                    },
+                    ]
                 )
 
                 answer = response.output_text
