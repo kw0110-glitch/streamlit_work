@@ -195,12 +195,12 @@ elif page == "ChatPDF":
 
                 file_obj = client.files.create(
                     file=uploaded_file,
-                    purpose="assistants"
+                    purpose="assistants",
                 )
 
-                client.beta.vector_stores.files.create(
+                client.beta.vector_stores.file_batches.create(
                     vector_store_id=vector_store.id,
-                    file_id=file_obj.id,
+                    file_ids=[file_obj.id],
                 )
 
                 st.session_state.pdf_vector_store_id = vector_store.id
