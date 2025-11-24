@@ -175,7 +175,6 @@ elif page == "ChatPDF":
                     )
                 st.session_state.pdf_vector_store_id = None
                 st.session_state.pdf_chat_messages = []
-                st.session_state["pdf_file"] = None
                 st.success("Vector store와 대화 기록이 초기화되었습니다.")
             except Exception as e:
                 st.error(f"Vector store 삭제 중 에러 발생: {e}")
