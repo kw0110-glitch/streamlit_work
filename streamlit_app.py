@@ -170,7 +170,7 @@ elif page == "ChatPDF":
             try:
                 if st.session_state.pdf_vector_store_id:
                     client = OpenAI(api_key=api_key)
-                    client.beta.vector_stores.delete(
+                    client.vector_stores.delete(
                         vector_store_id=st.session_state.pdf_vector_store_id
                     )
                 st.session_state.pdf_vector_store_id = None
@@ -188,18 +188,18 @@ elif page == "ChatPDF":
     if uploaded_file is not None and st.session_state.pdf_vector_store_id is None:
         try:
             with st.spinner("PDF를 업로드하고 인덱싱 중입니다..."):
-                vector_store = client.beta.vector_stores.create(
+                vector_store = client.vector_stores.create(
                     name="ChatPDF Vector Store"
                 )
 
                 file_obj = client.files.create(
                     file=uploaded_file,
-                    purpose="assistants",
+                    purpose="assistants"
                 )
 
-                client.beta.vector_stores.file_batches.create(
+                client.vector_stores.files.create(
                     vector_store_id=vector_store.id,
-                    file_ids=[file_obj.id],
+                    file_id=file_obj.id,
                 )
 
                 st.session_state.pdf_vector_store_id = vector_store.id
